@@ -193,28 +193,6 @@
     });
   }
 
-  /* ---------- Custom cursor ---------- */
-  const dot = $("#cursorDot");
-  const ring = $("#cursorRing");
-  if (dot && ring && window.matchMedia("(hover:hover)").matches && !prefersReduced) {
-    let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
-    window.addEventListener("mousemove", (e) => {
-      mx = e.clientX; my = e.clientY;
-      dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
-    });
-    const follow = () => {
-      rx += (mx - rx) * 0.18;
-      ry += (my - ry) * 0.18;
-      ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
-      requestAnimationFrame(follow);
-    };
-    follow();
-    $$("a, button, .card, [data-tilt]").forEach((el) => {
-      el.addEventListener("mouseenter", () => ring.classList.add("grow"));
-      el.addEventListener("mouseleave", () => ring.classList.remove("grow"));
-    });
-  }
-
   /* ---------- Magnetic buttons ---------- */
   if (!prefersReduced && window.matchMedia("(hover:hover)").matches) {
     $$(".btn").forEach((btn) => {
