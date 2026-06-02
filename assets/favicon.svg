@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Sip Street 7">
+  <rect width="512" height="512" rx="104" fill="#1a7a3e"/>
+  <circle cx="396" cy="120" r="30" fill="#f5bf1f"/>
+  <text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle"
+        font-family="'Segoe UI', Arial, sans-serif" font-weight="700" font-size="248" fill="#fbf4e6">S7</text>
+</svg>

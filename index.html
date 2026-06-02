@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sip Street 7 — The Treat Starts Here | Fresh Juice & Treats, Australia</title>
+<meta name="description" content="Sip Street 7 — Australia's freshest little treat street. Cold-pressed juices, green juice, Dutch mini pancakes, banana popsicles, smoothies & fresh fruit plates. Made fresh, served cold. The treat starts here." />
+<meta name="theme-color" content="#1a7a3e" />
+<link rel="canonical" href="https://www.sipstreet7.com.au/" />
+
+<!-- Favicons & app icons -->
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
+
+<!-- Open Graph / social sharing  (set absolute URLs on deploy) -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Sip Street 7" />
+<meta property="og:title" content="Sip Street 7 — The Treat Starts Here" />
+<meta property="og:description" content="Australia's freshest little treat street. Cold-pressed juices, Dutch mini pancakes, smoothies & fresh fruit. Made fresh, served cold." />
+<meta property="og:url" content="https://www.sipstreet7.com.au/" />
+<meta property="og:image" content="https://www.sipstreet7.com.au/assets/product-text-cup.jpeg" />
+<meta property="og:image:alt" content="Sip Street 7 strawberry street lemonade" />
+<meta property="og:locale" content="en_AU" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Sip Street 7 — The Treat Starts Here" />
+<meta name="twitter:description" content="Cold-pressed juices, Dutch mini pancakes, smoothies & fresh fruit. Made fresh, served cold." />
+<meta name="twitter:image" content="https://www.sipstreet7.com.au/assets/product-text-cup.jpeg" />
+
+<!-- Structured data: LocalBusiness (placeholder details — swap for real on launch) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FoodEstablishment",
+  "name": "Sip Street 7",
+  "description": "Australia's freshest little treat street — cold-pressed juices, Dutch mini pancakes, smoothies, popsicles & fresh fruit plates.",
+  "image": "https://www.sipstreet7.com.au/assets/product-text-cup.jpeg",
+  "url": "https://www.sipstreet7.com.au/",
+  "telephone": "+61-2-7000-0007",
+  "priceRange": "$$",
+  "servesCuisine": ["Juice Bar", "Healthy", "Desserts"],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "7 Sip Street",
+    "addressLocality": "Bondi Beach",
+    "addressRegion": "NSW",
+    "postalCode": "2026",
+    "addressCountry": "AU"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": -33.8908, "longitude": 151.2743 },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "07:00", "closes": "18:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday","Sunday"], "opens": "08:00", "closes": "19:00" }
+  ],
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "600" }
+}
+</script>
+
+<!-- Fonts: Fredoka (display) · Caveat (script) · DM Sans (body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Caveat:wght@600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="styles.css" />
+<!-- progressive-enhancement flag: enables reveal animations only when JS runs -->
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<!-- ===== Loader ===== -->
+<div class="loader" id="loader">
+  <div class="loader__inner">
+    <div class="loader__cup">🥤</div>
+    <div class="loader__txt">The treat starts here…</div>
+    <div class="loader__bar"><i id="loaderBar"></i></div>
+  </div>
+</div>
+
+<!-- ===== Skip link (accessibility) ===== -->
+<a href="#menu" class="skip-link">Skip to menu</a>
+
+<!-- ===== Custom cursor ===== -->
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" id="nav">
+  <a href="#top" class="nav__logo" aria-label="Sip Street 7 home">
+    <img src="assets/logo-wordmark.jpeg" alt="Sip Street 7" />
+  </a>
+  <div class="nav__links">
+    <a href="#menu">Menu</a>
+    <a href="#story">Our Story</a>
+    <a href="#why">Why Us</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#visit">Visit</a>
+  </div>
+  <div class="nav__cta">
+    <a href="#menu" class="btn red js-order"><span>Order Now <i class="arrow">↗</i></span></a>
+    <button class="nav__burger" id="burger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- mobile drawer -->
+<div class="drawer" id="drawer">
+  <span class="script">Sip Street 7</span>
+  <a href="#menu">Menu</a>
+  <a href="#story">Our Story</a>
+  <a href="#why">Why Us</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#visit">Visit</a>
+</div>
+
+<span id="top"></span>
+
+<!-- ===== HERO ===== -->
+<header class="hero" id="hero">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+
+  <div class="container hero__grid">
+    <div class="hero__copy">
+      <span class="hero__est" data-hero="1">🇦🇺 Est. 2026 · Made fresh in <b>&nbsp;Australia</b></span>
+      <h1>
+        <span class="l"><span>The <em>Treat</em></span></span>
+        <span class="l"><span class="starts">starts</span></span>
+        <span class="l"><span class="treat">here.</span></span>
+      </h1>
+      <p class="hero__sub" data-hero="2">
+        Cold-pressed juices, fluffy Dutch mini pancakes, fruit-loaded smoothies & frozen pops —
+        whipped up fresh on the corner of your new favourite street.
+      </p>
+      <div class="hero__cta" data-hero="3">
+        <a href="#menu" class="btn"><span>Explore the Menu <i class="arrow">↗</i></span></a>
+        <a href="#visit" class="btn ghost"><span>📍 Find Us</span></a>
+      </div>
+      <div class="hero__rating" data-hero="3">
+        <span class="stars">★★★★★</span>
+        <small><b>4.9/5</b> from 600+ happy locals</small>
+      </div>
+    </div>
+
+    <div class="hero__visual" data-hero="visual">
+      <img class="hero__mascot" src="assets/mascot-light.jpeg" alt="Sip Street 7 mascot" data-float="0.05" />
+      <div class="hero__product" data-tilt>
+        <img src="assets/product-text-cup.jpeg" alt="Strawberry lemonade — made fresh, served cold" />
+      </div>
+      <div class="hero__badge"><span>MADE FRESH<b>7</b>DAYS A WEEK</span></div>
+      <span class="fruit f1" data-float="0.12">🍓</span>
+      <span class="fruit f2" data-float="0.18">🍋</span>
+      <span class="fruit f3" data-float="0.1">🥝</span>
+      <span class="fruit f4" data-float="0.15">🍊</span>
+    </div>
+  </div>
+
+  <div class="scroll-cue" data-hero="3">
+    <span>scroll</span>
+    <span class="mouse"></span>
+  </div>
+</header>
+
+<!-- ===== MARQUEE ===== -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>MADE FRESH</span><span>SERVED COLD</span><span>AUSSIE GROWN</span><span>NO NASTIES</span>
+    <span>THE TREAT STARTS HERE</span><span>SIP HAPPY</span>
+    <span>MADE FRESH</span><span>SERVED COLD</span><span>AUSSIE GROWN</span><span>NO NASTIES</span>
+    <span>THE TREAT STARTS HERE</span><span>SIP HAPPY</span>
+  </div>
+</div>
+
+<!-- ===== ABOUT / STORY ===== -->
+<section class="about" id="story">
+  <div class="container about__grid">
+    <div class="about__media" data-reveal="left">
+      <span class="leaf" data-float="0.1">🍃</span>
+      <div class="img-main"><img src="assets/img/gallery1.jpg" alt="Fresh strawberry smoothie" /></div>
+      <div class="img-float"><img src="assets/img/green-juice.jpg" alt="Green juice with mint" /></div>
+    </div>
+    <div class="about__copy">
+      <span class="eyebrow">Our Story</span>
+      <div class="section-head">
+        <h2>A little street where <span class="script">good things</span> are blended fresh.</h2>
+      </div>
+      <p class="lead">Sip Street 7 started with one simple idea — treats should taste like the fruit they came from.</p>
+      <p>No powders, no syrups pretending to be fruit, no shortcuts. Just ripe Aussie produce, cold-pressed and hand-blended to order. From sunrise green juices to golden Dutch mini-pancakes, every cup and plate leaves our window made fresh and served cold.</p>
+      <p>Pull up a stool, meet the cheeky little cup with the number 7 straw, and find your new go-to corner of the street.</p>
+      <div class="stats">
+        <div class="stat"><b data-count="100">0</b><span>% real fruit</span></div>
+        <div class="stat"><b data-count="14">0</b><span>signature blends</span></div>
+        <div class="stat"><b data-count="7">0</b><span>days a week, fresh</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MENU ===== -->
+<section class="menu" id="menu">
+  <div class="container">
+    <div class="menu__top">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">The Menu</span>
+        <h2>Pick your <span class="script">treat</span>.</h2>
+        <p>Six house favourites, blended &amp; griddled fresh to order. Prices in AUD.</p>
+      </div>
+      <a href="#visit" class="btn yellow" data-reveal="right"><span>See full menu in store ↗</span></a>
+    </div>
+
+    <div class="menu__grid">
+
+      <article class="card" data-reveal data-delay="1">
+        <div class="card__img">
+          <span class="card__tag cold">Cold-pressed</span>
+          <img src="assets/img/juice.jpg" alt="Fresh orange juice" />
+        </div>
+        <div class="card__body">
+          <h3>Sunshine Juice <span class="card__price">$7.5</span></h3>
+          <p>Cold-pressed oranges, a kiss of lemon &amp; ginger. Pure Aussie sunshine in a cup.</p>
+          <button type="button" class="card__order js-order">Add to order <i class="arrow">→</i></button>
+        </div>
+      </article>
+
+      <article class="card" data-reveal data-delay="2">
+        <div class="card__img">
+          <span class="card__tag veg">Vegan</span>
+          <img src="assets/img/green-juice.jpg" alt="Green juice" />
+        </div>
+        <div class="card__body">
+          <h3>Green Machine <span class="card__price">$8.5</span></h3>
+          <p>Spinach, cucumber, green apple, kiwi &amp; mint. The glow-up your morning needs.</p>
+          <button type="button" class="card__order js-order">Add to order <i class="arrow">→</i></button>
+        </div>
+      </article>
+
+      <article class="card" data-reveal data-delay="3">
+        <div class="card__img">
+          <span class="card__tag sweet">Hot &amp; fresh</span>
+          <img src="assets/img/pancakes.jpg" alt="Dutch mini pancakes" />
+        </div>
+        <div class="card__body">
+          <h3>Dutch Mini Pancakes <span class="card__price">$9.0</span></h3>
+          <p>Fluffy poffertjes off the griddle, dusted in icing sugar with banana &amp; maple.</p>
+          <button type="button" class="card__order js-order">Add to order <i class="arrow">→</i></button>
+        </div>
+      </article>
+
+      <article class="card" data-reveal data-delay="1">
+        <div class="card__img">
+          <span class="card__tag">Frozen</span>
+          <img src="assets/img/popsicle.jpg" alt="Fresh fruit popsicles" />
+        </div>
+        <div class="card__body">
+          <h3>Banana Popsicles <span class="card__price">$5.5</span></h3>
+          <p>Frozen-fruit pops — creamy banana, berry &amp; mango. Real fruit, no nasties.</p>
+          <button type="button" class="card__order js-order">Add to order <i class="arrow">→</i></button>
+        </div>
+      </article>
+
+      <article class="card" data-reveal data-delay="2">
+        <div class="card__img">
+          <span class="card__tag cold">Blended</span>
+          <img src="assets/img/smoothie.jpg" alt="Fruit smoothies" />
+        </div>
+        <div class="card__body">
+          <h3>Street Smoothie <span class="card__price">$8.0</span></h3>
+          <p>Banana, mixed berries, mango &amp; house granola, blitzed thick &amp; creamy.</p>
+          <button type="button" class="card__order js-order">Add to order <i class="arrow">→</i></button>
+        </div>
+      </article>
+
+      <article class="card" data-reveal data-delay="3">
+        <div class="card__img">
+          <span class="card__tag veg">Share plate</span>
+          <img src="assets/img/fruit-plate.jpg" alt="Fresh fruit plate" />
+        </div>
+        <div class="card__body">
+          <h3>Fresh Fruit Plate <span class="card__price">$11</span></h3>
+          <p>A rainbow of seasonal fruit, sliced to order. Perfect for two to share.</p>
+          <button type="button" class="card__order js-order">Add to order <i class="arrow">→</i></button>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== SPOTLIGHT ===== -->
+<section class="spotlight">
+  <div class="container spotlight__grid">
+    <div class="spotlight__img" data-reveal="left" data-tilt>
+      <img src="assets/product-mascot-cup.jpeg" alt="Strawberry lemonade — Sip Street 7" />
+    </div>
+    <div class="spotlight__copy" data-reveal="right">
+      <span class="eyebrow">Signature Drink</span>
+      <h2><span class="made">Made&nbsp;Fresh.</span><br /><span class="cold">Served&nbsp;Cold.</span></h2>
+      <p>Our Strawberry Street Lemonade — hand-pressed lemons, fresh strawberries and a mountain of ice. The drink that started the queue.</p>
+      <ul class="spotlight__list">
+        <li><span class="dot">✓</span> Real fruit pressed every single morning</li>
+        <li><span class="dot">✓</span> Zero artificial colours or flavours</li>
+        <li><span class="dot">✓</span> Compostable cups &amp; straws, always</li>
+      </ul>
+      <a href="#menu" class="btn yellow js-order" data-item="Strawberry Street Lemonade"><span>Order a Lemonade <i class="arrow">↗</i></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHY US / VALUES ===== -->
+<section class="values" id="why">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">Why Sip Street 7</span>
+      <h2>Little cup, <span class="script">big standards</span>.</h2>
+    </div>
+    <div class="values__grid">
+      <div class="value" data-reveal data-delay="1">
+        <div class="value__ico">🍓</div>
+        <h3>Fresh, never frozen*</h3>
+        <p>Fruit arrives daily from local growers. *Except the popsicles — those we freeze on purpose.</p>
+      </div>
+      <div class="value" data-reveal data-delay="2">
+        <div class="value__ico">⚡</div>
+        <h3>Blended to order</h3>
+        <p>Nothing sits pre-made. Your cup is built the moment you order it.</p>
+      </div>
+      <div class="value" data-reveal data-delay="3">
+        <div class="value__ico">🌿</div>
+        <h3>Kind to the planet</h3>
+        <p>Compostable cups, paper straws and zero single-use plastic at the window.</p>
+      </div>
+      <div class="value" data-reveal data-delay="4">
+        <div class="value__ico">😊</div>
+        <h3>Made to make you smile</h3>
+        <p>Good fruit, good vibes, and a cheeky mascot who runs on sugar-free joy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="reviews">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">Happy Sippers</span>
+      <h2>Loved up and down <span class="script">the street</span>.</h2>
+    </div>
+    <div class="reviews__grid">
+      <div class="review" data-reveal data-delay="1">
+        <span class="quote">”</span>
+        <div class="stars">★★★★★</div>
+        <p>The green juice actually tastes like a treat, not a punishment. My new morning ritual before the beach.</p>
+        <div class="review__who">
+          <div class="review__ava" style="background:var(--green)">M</div>
+          <div><b>Maya R.</b><span>Bondi, NSW</span></div>
+        </div>
+      </div>
+      <div class="review" data-reveal data-delay="2">
+        <span class="quote">”</span>
+        <div class="stars">★★★★★</div>
+        <p>Dutch mini pancakes + a strawberry lemonade = my kids' idea of heaven. Honestly mine too.</p>
+        <div class="review__who">
+          <div class="review__ava" style="background:var(--red)">J</div>
+          <div><b>Jack T.</b><span>Surry Hills, NSW</span></div>
+        </div>
+      </div>
+      <div class="review" data-reveal data-delay="3">
+        <span class="quote">”</span>
+        <div class="stars">★★★★★</div>
+        <p>Cutest little spot on the strip and the freshest juice I've had in Sydney. That mascot needs its own fan club.</p>
+        <div class="review__who">
+          <div class="review__ava" style="background:var(--orange)">P</div>
+          <div><b>Priya S.</b><span>Coogee, NSW</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section class="gallery" id="gallery">
+  <div class="container">
+    <div class="gallery__head" data-reveal>
+      <span class="eyebrow center">@sipstreet7</span>
+      <div class="section-head" style="text-align:center">
+        <h2>Tag us &amp; <span class="script">sip happy</span>.</h2>
+      </div>
+    </div>
+    <div class="gallery__grid">
+      <a href="#" class="tall" data-reveal data-delay="1"><img src="assets/img/gallery-fruit.jpg" alt="Fresh fruit platter" /></a>
+      <a href="#" data-reveal data-delay="1"><img src="assets/img/smoothie.jpg" alt="Smoothies" /></a>
+      <a href="#" data-reveal data-delay="2"><img src="assets/img/gallery-juices.jpg" alt="Cold drinks" /></a>
+      <a href="#" data-reveal data-delay="2"><img src="assets/img/juice.jpg" alt="Orange juice" /></a>
+      <a href="#" data-reveal data-delay="3"><img src="assets/img/pancakes.jpg" alt="Dutch mini pancakes" /></a>
+      <a href="#" class="tall" data-reveal data-delay="3"><img src="assets/img/gallery-pineapple.jpg" alt="Pineapple having fun" /></a>
+      <a href="#" data-reveal data-delay="4"><img src="assets/img/green-juice.jpg" alt="Green juice" /></a>
+      <a href="#" data-reveal data-delay="4"><img src="assets/img/popsicle.jpg" alt="Fruit popsicles" /></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VISIT ===== -->
+<section class="visit" id="visit">
+  <div class="container visit__grid">
+    <div class="visit__card" data-reveal="left">
+      <span class="leaf">🥤</span>
+      <h2>Come say hi on<br />the street.</h2>
+      <div class="visit__row">
+        <span class="ico">📍</span>
+        <div><b>Find the window</b><span>7 Sip Street, Bondi Beach, Sydney NSW 2026</span></div>
+      </div>
+      <div class="visit__row">
+        <span class="ico">📞</span>
+        <div><b>Give us a buzz</b><span>(02) 7000 0007</span></div>
+      </div>
+      <div class="visit__row">
+        <span class="ico">✉️</span>
+        <div><b>Say hello</b><span>hello@sipstreet7.com.au</span></div>
+      </div>
+      <div class="visit__hours">
+        <div class="visit__row"><span class="ico">🕗</span><div><b>Mon – Fri</b><span>7:00am – 6:00pm</span></div></div>
+        <div class="visit__row"><span class="ico">🌞</span><div><b>Sat – Sun</b><span>8:00am – 7:00pm</span></div></div>
+      </div>
+    </div>
+    <div class="visit__map" data-reveal="right">
+      <iframe
+        title="Map to Sip Street 7, Bondi Beach"
+        src="https://www.google.com/maps?q=Bondi%20Beach%20NSW%202026%20Australia&output=embed"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ===== NEWSLETTER ===== -->
+<section class="newsletter">
+  <div class="container">
+    <div class="newsletter__inner" data-reveal="zoom">
+      <h2>Get first sips &amp; secret menu drops</h2>
+      <p>Join the street list for new blends, seasonal specials and the odd free treat. No spam — pinky promise.</p>
+      <form id="newsletterForm">
+        <input type="email" placeholder="your@email.com.au" required aria-label="Email address" />
+        <button type="submit" class="btn yellow"><span>Join the Street ↗</span></button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="assets/mascot-dark.jpeg" alt="Sip Street 7 mascot" />
+        <span class="script">The treat starts here.</span>
+        <p>Australia's freshest little treat street. Made fresh, served cold — seven days a week.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#story">Our Story</a></li>
+          <li><a href="#why">Why Us</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="#visit">7 Sip Street, Bondi</a></li>
+          <li><a href="#visit">Opening Hours</a></li>
+          <li><a href="tel:+61270000007">(02) 7000 0007</a></li>
+          <li><a href="mailto:hello@sipstreet7.com.au">Email Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow the Street</h4>
+        <div class="socials">
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="TikTok">♪</a>
+        </div>
+        <p style="margin-top:16px;color:rgba(251,244,230,.7);font-size:.9rem">@sipstreet7</p>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Sip Street 7. All rights reserved. Made with 🍓 in Australia.</span>
+      <span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · Built for happy sippers.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== Order modal (3 ways to order) ===== -->
+<div class="order" id="orderModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="orderTitle">
+  <div class="order__backdrop" data-close></div>
+  <div class="order__panel" role="document">
+    <button class="order__x" data-close aria-label="Close">×</button>
+    <span class="eyebrow center">How would you like it?</span>
+    <h3 id="orderTitle">Order your treat</h3>
+    <p class="order__sub" id="orderSub">Pick the easiest way to get your Sip Street 7 fix.</p>
+    <div class="order__opts">
+      <a class="order__opt" id="orderOnline" href="#" target="_blank" rel="noopener">
+        <span class="order__ico">🛵</span>
+        <b>Order online</b>
+        <small>Delivered to your door</small>
+      </a>
+      <a class="order__opt" id="orderCall" href="#">
+        <span class="order__ico">📞</span>
+        <b>Call to order</b>
+        <small id="orderPhone">(02) 7000 0007</small>
+      </a>
+      <button class="order__opt" type="button" id="orderVisit">
+        <span class="order__ico">📍</span>
+        <b>Order at the window</b>
+        <small>7 Sip Street, Bondi</small>
+      </button>
+    </div>
+    <p class="order__note">🧪 Demo links — swap in the real ordering URL &amp; phone in <code>script.js</code>.</p>
+  </div>
+</div>
+
+<!-- ===== Smooth scroll (Lenis) + animation (GSAP) — progressive enhancement ===== -->
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

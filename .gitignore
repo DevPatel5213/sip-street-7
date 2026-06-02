@@ -1,0 +1,10 @@
+# OS / editor cruft
+Thumbs.db
+.DS_Store
+*.log
+
+# Local agent / preview config (not needed for the live site)
+.claude/
+
+# Original logo/photo drops — already copied into assets/
+WhatsApp Image*.jpeg
