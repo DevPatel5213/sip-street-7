@@ -17,8 +17,8 @@
      ========================================================= */
   const SS7 = {
     orderUrl:     "https://www.ubereats.com/au",          // real online-ordering link goes here
-    phone:        "+61270000007",                          // dialled number (E.164 format)
-    phoneDisplay: "(02) 7000 0007",                        // shown on screen
+    phone:        "+61413697307",                          // dialled number (E.164 format)
+    phoneDisplay: "+61 413 697 307",                       // shown on screen
     instagram:    "https://www.instagram.com/sipstreet.7/",// Instagram profile
   };
 
