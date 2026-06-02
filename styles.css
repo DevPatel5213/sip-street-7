@@ -88,6 +88,19 @@ ul{ list-style:none; }
 :focus-visible{ outline:3px solid var(--green); outline-offset:3px; border-radius:4px; }
 .nav__links a:focus-visible, .btn:focus-visible{ outline-color:var(--yellow); }
 
+/* ---------- Inline SVG icons ---------- */
+.ic{ width:1.15em; height:1.15em; display:inline-block; vertical-align:-0.18em; flex:0 0 auto; }
+.hero__est .ic{ color:var(--red); width:1.05em; height:1.05em; }
+.btn .ic{ width:1.1em; height:1.1em; vertical-align:-0.16em; }
+.value__ico{ color:var(--green); }
+.value__ico .ic{ width:32px; height:32px; }
+.value:hover .value__ico{ color:#fff; }
+.visit__row .ico{ color:var(--yellow); display:flex; align-items:center; }
+.visit__row .ico .ic{ width:24px; height:24px; }
+.order__ico{ color:var(--green-deep); }
+.order__ico .ic{ width:24px; height:24px; }
+.socials a .ic{ width:20px; height:20px; }
+
 /* ---------- Layout helpers ---------- */
 .container{ width:min(1240px, 92vw); margin-inline:auto; }
 section{ position:relative; }
