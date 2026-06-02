@@ -16,10 +16,18 @@
      👉 Swap these three values for the client's real details.
      ========================================================= */
   const SS7 = {
-    orderUrl:     "https://www.ubereats.com/au",  // real online-ordering link goes here
-    phone:        "+61270000007",                  // dialled number (E.164 format)
-    phoneDisplay: "(02) 7000 0007",                // shown on screen
+    orderUrl:     "https://www.ubereats.com/au",          // real online-ordering link goes here
+    phone:        "+61270000007",                          // dialled number (E.164 format)
+    phoneDisplay: "(02) 7000 0007",                        // shown on screen
+    instagram:    "https://www.instagram.com/sipstreet.7/",// Instagram profile
   };
+
+  // Point the gallery tiles at the Instagram profile (open in a new tab)
+  $$(".gallery__grid a").forEach((a) => {
+    a.href = SS7.instagram;
+    a.target = "_blank";
+    a.rel = "noopener";
+  });
 
   /* ---------- Loader ---------- */
   const loader = $("#loader");
