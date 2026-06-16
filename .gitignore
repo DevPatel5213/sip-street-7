@@ -8,3 +8,6 @@ Thumbs.db
 
 # Original logo/photo drops — already copied into assets/
 WhatsApp Image*.jpeg
+
+# SECRET: SMTP mailbox password — must NEVER be committed (create only on the server)
+secrets.php
