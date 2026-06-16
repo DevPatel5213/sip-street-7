@@ -284,20 +284,36 @@
     });
   }
 
-  /* ---------- Newsletter (demo handler) ---------- */
+  /* ---------- Newsletter (posts to subscribe.php → emails the shop) ---------- */
   const form = $("#newsletterForm");
   if (form) {
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const input = form.querySelector("input");
+      const input = form.querySelector('input[type="email"]');
       const btn = form.querySelector("button span");
-      if (btn) btn.textContent = "You're on the street! 🎉";
-      input.value = "";
+      const original = btn ? btn.textContent : "Join the Street ↗";
+      const setBtn = (t) => { if (btn) btn.textContent = t; };
+      const reset = (delay) => setTimeout(() => { setBtn(original); input.disabled = false; }, delay);
+
+      setBtn("Sending…");
       input.disabled = true;
-      setTimeout(() => {
-        if (btn) btn.textContent = "Join the Street ↗";
-        input.disabled = false;
-      }, 3000);
+      try {
+        const res = await fetch(form.getAttribute("action") || "subscribe.php", {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: new FormData(form),
+        });
+        const data = await res.json().catch(() => ({ ok: false }));
+        if (res.ok && data.ok) {
+          setBtn("You're on the street! 🎉");
+          input.value = "";
+        } else {
+          setBtn(data && data.error ? "✕ " + data.error.slice(0, 24) : "Hmm, try again ↗");
+        }
+      } catch (err) {
+        setBtn("Hmm, try again ↗");
+      }
+      reset(3500);
     });
   }
 })();

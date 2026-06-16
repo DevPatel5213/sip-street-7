@@ -405,8 +405,9 @@
     <div class="newsletter__inner" data-reveal="zoom">
       <h2>Get first sips &amp; secret menu drops</h2>
       <p>Join the street list for new blends, seasonal specials and the odd free treat. No spam — pinky promise.</p>
-      <form id="newsletterForm">
-        <input type="email" placeholder="your@email.com.au" required aria-label="Email address" />
+      <form id="newsletterForm" action="subscribe.php" method="POST">
+        <input type="email" name="email" placeholder="your@email.com.au" required aria-label="Email address" />
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" />
         <button type="submit" class="btn yellow"><span>Join the Street ↗</span></button>
       </form>
     </div>
