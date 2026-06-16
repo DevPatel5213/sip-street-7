@@ -197,7 +197,7 @@ section{ position:relative; }
 }
 .nav__logo{ display:flex; align-items:center; gap:.55em; }
 .nav__logo img{
-  height:42px; width:auto; mix-blend-mode:multiply;
+  height:42px; width:auto;
   transition:height .4s var(--ease);
 }
 .nav.scrolled .nav__logo img{ height:36px; }
@@ -327,7 +327,7 @@ section{ position:relative; }
 
 .hero__mascot{
   position:absolute; z-index:6; right:-6%; top:-7%;
-  width:140px; mix-blend-mode:multiply;
+  width:140px;
   animation:bob 2.6s ease-in-out infinite;
 }
 
@@ -717,7 +717,7 @@ section{ position:relative; }
   padding:18px clamp(16px,4vw,46px); position:sticky; top:0; z-index:100;
   background:rgba(251,244,230,.9); backdrop-filter:blur(12px); border-bottom:1px solid var(--line);
 }
-.legal-nav img{ height:40px; mix-blend-mode:multiply; }
+.legal-nav img{ height:40px; }
 .legal-nav a.back{ font-family:var(--display); font-weight:600; color:var(--green); }
 .legal-hero{
   background:var(--green-dark); color:var(--cream);
