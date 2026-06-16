@@ -57,6 +57,8 @@ if ($SMTP_PASS === '') {
 
 // ---------- 1) Welcome email TO the subscriber (HTML) ----------
 $welcomeSubject = 'Welcome to the street 🥤 - ' . $BRAND;
+$welcomeHtml = @file_get_contents(__DIR__ . '/welcome-email.html');
+if ($welcomeHtml === false || trim($welcomeHtml) === '') {
 $welcomeHtml = <<<'HTML'
 <!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#fbf4e6;">
@@ -93,6 +95,7 @@ $welcomeHtml = <<<'HTML'
 </td></tr>
 </table></td></tr></table></body></html>
 HTML;
+}
 
 $errW = '';
 $welcomeOk = smtp_send($SMTP_HOST, $SMTP_PORT, $SMTP_USER, $SMTP_PASS,
