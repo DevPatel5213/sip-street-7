@@ -399,17 +399,12 @@
   </div>
 </section>
 
-<!-- ===== NEWSLETTER ===== -->
-<section class="newsletter">
+<!-- ===== NEWSLETTER (Hostinger Reach embedded form) ===== -->
+<section class="newsletter" id="newsletter">
   <div class="container">
-    <div class="newsletter__inner" data-reveal="zoom">
-      <h2>Get first sips &amp; secret menu drops</h2>
-      <p>Join the street list for new blends, seasonal specials and the odd free treat. No spam — pinky promise.</p>
-      <form id="newsletterForm" action="subscribe.php" method="POST">
-        <input type="email" name="email" placeholder="your@email.com.au" required aria-label="Email address" />
-        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" />
-        <button type="submit" class="btn yellow"><span>Join the Street ↗</span></button>
-      </form>
+    <div class="reach-form-wrap" data-reveal="zoom">
+      <!-- Reach renders the on-brand signup form here -->
+      <div data-reach-form="207007db-f675-450d-9ffa-fa3d7cf8e62d"></div>
     </div>
   </div>
 </section>
@@ -491,5 +486,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="script.js"></script>
+
+<!-- Hostinger Reach — onsite tracking + embedded form engine -->
+<script src="https://cdn-reach.hostinger.com/js/embed.js"></script>
 </body>
 </html>
