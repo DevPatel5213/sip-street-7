@@ -2,26 +2,26 @@
 /**
  * Sip Street 7 — newsletter signup handler (authenticated SMTP).
  *
- * Hostinger silently drops PHP mail(), so this sends through your mailbox
- * via SMTP instead. Self-contained — no external libraries.
+ * On submit it sends TWO emails through your Hostinger mailbox:
+ *   1. a "Welcome to the street" confirmation TO the subscriber
+ *   2. a notification TO the shop inbox (hello@)
  *
- * SETUP (do this on the server, NOT in the public repo):
- *   1. Upload this file to public_html.
- *   2. Create a file called  secrets.php  next to it containing ONE line:
- *        <?php $SMTP_PASS = 'your-hello@-mailbox-password';
- *      (This keeps your password out of the public GitHub repo.)
+ * Hostinger silently drops PHP mail(), so this uses SMTP. Self-contained.
+ *
+ * SETUP (on the server, NOT in the public repo):
+ *   Create  secrets.php  next to this file with one line:
+ *     <?php $SMTP_PASS = 'your-hello@-mailbox-password';
  */
 
 // ===== CONFIG =====
-$TO        = 'hello@sipstreet7.com.au';   // where signups are delivered
-$SMTP_USER = 'hello@sipstreet7.com.au';   // your mailbox (login + From)
+$TO        = 'hello@sipstreet7.com.au';   // shop inbox (gets notified)
+$SMTP_USER = 'hello@sipstreet7.com.au';   // mailbox login + From address
 $SMTP_HOST = 'smtp.hostinger.com';        // Hostinger outgoing server
 $SMTP_PORT = 465;                         // 465 = SSL. If blocked, try 587 (STARTTLS)
 $BRAND     = 'Sip Street 7';
 
-// Password is loaded from secrets.php (gitignored) so it never hits the repo.
 $SMTP_PASS = '';
-@include __DIR__ . '/secrets.php';
+@include __DIR__ . '/secrets.php';        // sets $SMTP_PASS (gitignored)
 // ==================
 
 $wantsJson = isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false;
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
   respond(false, 'Method not allowed', $wantsJson);
 }
 
-// Honeypot — real users never fill the hidden "website" field
+// Honeypot — bots fill the hidden "website" field
 if (!empty($_POST['website'])) {
   respond(true, '', $wantsJson);
 }
@@ -55,29 +55,45 @@ if ($SMTP_PASS === '') {
   respond(false, 'Email is not configured yet.', $wantsJson);
 }
 
-// ----- Build the message -----
-$subject = 'New newsletter signup - ' . $BRAND;
-$body  = "A new subscriber joined the Sip Street list:\r\n\r\n";
-$body .= "Email: $email\r\n";
-$body .= "When:  " . date('Y-m-d H:i:s') . "\r\n";
-$body .= "IP:    " . ($_SERVER['REMOTE_ADDR'] ?? 'n/a') . "\r\n";
+// ---------- 1) Welcome email TO the subscriber (HTML) ----------
+$welcomeSubject = 'Welcome to the street 🥤 - ' . $BRAND;
+$welcomeHtml =
+  '<div style="font-family:Arial,Helvetica,sans-serif;max-width:480px;margin:auto;background:#fbf4e6;border-radius:16px;padding:30px;color:#15281b">'
+  . '<h1 style="color:#1a7a3e;margin:0 0 10px;font-size:24px">Welcome to the street! 🥤</h1>'
+  . '<p style="margin:0 0 14px;font-size:15px;line-height:1.6">Thanks for joining the <strong>Sip Street 7</strong> list — you\'re officially one of us.</p>'
+  . '<p style="margin:0 0 14px;font-size:15px;line-height:1.6">You\'ll be first to hear about new blends, seasonal specials and the odd free treat. No spam — pinky promise.</p>'
+  . '<p style="margin:0;font-size:16px;line-height:1.6;color:#1a7a3e;font-weight:bold">The treat starts here.</p>'
+  . '<p style="margin:20px 0 0;font-size:12px;color:#5d6f60">Sip Street 7 · 1 Marion St, Midland WA 6056 · sipstreet7.com.au</p>'
+  . '</div>';
 
-$err = '';
-$ok = smtp_send($SMTP_HOST, $SMTP_PORT, $SMTP_USER, $SMTP_PASS, $SMTP_USER, $BRAND, $TO, $email, $subject, $body, $err);
+$errW = '';
+$welcomeOk = smtp_send($SMTP_HOST, $SMTP_PORT, $SMTP_USER, $SMTP_PASS,
+  $SMTP_USER, $BRAND, $email, $SMTP_USER, $welcomeSubject, $welcomeHtml, $errW, true);
 
-if ($ok) {
+// ---------- 2) Notification TO the shop inbox (plain text) ----------
+$notifySubject = 'New newsletter signup - ' . $BRAND;
+$notifyBody  = "A new subscriber joined the Sip Street list:\r\n\r\n";
+$notifyBody .= "Email: $email\r\n";
+$notifyBody .= "When:  " . date('Y-m-d H:i:s') . "\r\n";
+$notifyBody .= "IP:    " . ($_SERVER['REMOTE_ADDR'] ?? 'n/a') . "\r\n";
+
+$errN = '';
+smtp_send($SMTP_HOST, $SMTP_PORT, $SMTP_USER, $SMTP_PASS,
+  $SMTP_USER, $BRAND, $TO, $email, $notifySubject, $notifyBody, $errN, false);
+
+// Success is driven by the subscriber's welcome email (the one they expect)
+if ($welcomeOk) {
   respond(true, '', $wantsJson);
 } else {
-  // $err is logged server-side; the visitor only sees a friendly message
-  error_log('[subscribe.php] SMTP error: ' . $err);
+  error_log('[subscribe.php] welcome err: ' . $errW . ' | notify err: ' . $errN);
   respond(false, 'Could not send right now - please try again.', $wantsJson);
 }
 
 /**
  * Minimal authenticated SMTP client (AUTH LOGIN).
- * Supports implicit SSL (port 465) and STARTTLS (port 587).
+ * Implicit SSL (465) or STARTTLS (587). $isHtml toggles the content type.
  */
-function smtp_send($host, $port, $user, $pass, $from, $fromName, $to, $replyTo, $subject, $body, &$err) {
+function smtp_send($host, $port, $user, $pass, $from, $fromName, $to, $replyTo, $subject, $body, &$err, $isHtml = false) {
   $transport = ($port == 465) ? "ssl://$host:$port" : "tcp://$host:$port";
   $ctx = stream_context_create(['ssl' => ['verify_peer' => true, 'verify_peer_name' => true, 'SNI_enabled' => true]]);
   $fp = @stream_socket_client($transport, $errno, $errstr, 20, STREAM_CLIENT_CONNECT, $ctx);
@@ -115,7 +131,7 @@ function smtp_send($host, $port, $user, $pass, $from, $fromName, $to, $replyTo, 
   $put(base64_encode($user));
   if (!$ok($read(), '334')) { fclose($fp); return false; }
   $put(base64_encode($pass));
-  if (!$ok($read(), '235')) { fclose($fp); return false; } // 235 = auth ok
+  if (!$ok($read(), '235')) { fclose($fp); return false; }
 
   $put("MAIL FROM:<$from>");
   if (!$ok($read(), '250')) { fclose($fp); return false; }
@@ -129,9 +145,9 @@ function smtp_send($host, $port, $user, $pass, $from, $fromName, $to, $replyTo, 
   $headers .= "Reply-To: <$replyTo>\r\n";
   $headers .= 'Subject: ' . $subject . "\r\n";
   $headers .= "MIME-Version: 1.0\r\n";
-  $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+  $headers .= 'Content-Type: ' . ($isHtml ? 'text/html' : 'text/plain') . "; charset=UTF-8\r\n";
   $headers .= 'Date: ' . date('r') . "\r\n";
-  $bodyEsc = preg_replace('/^\./m', '..', $body); // dot-stuffing
+  $bodyEsc = preg_replace('/^\./m', '..', $body);
   $put($headers . "\r\n" . $bodyEsc . "\r\n.");
   if (!$ok($read(), '250')) { fclose($fp); return false; }
 
