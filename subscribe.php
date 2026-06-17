@@ -13,15 +13,19 @@
  *     <?php $SMTP_PASS = 'your-hello@-mailbox-password';
  */
 
-// ===== CONFIG =====
+// ===== CONFIG (sending via Brevo for reliable Gmail delivery) =====
 $TO        = 'hello@sipstreet7.com.au';   // shop inbox (gets notified)
-$SMTP_USER = 'hello@sipstreet7.com.au';   // mailbox login + From address
-$SMTP_HOST = 'smtp.hostinger.com';        // Hostinger outgoing server
-$SMTP_PORT = 465;                         // 465 = SSL. If blocked, try 587 (STARTTLS)
+$FROM      = 'hello@sipstreet7.com.au';   // verified sender / authenticated domain in Brevo
 $BRAND     = 'Sip Street 7';
+$SMTP_HOST = 'smtp-relay.brevo.com';      // Brevo SMTP relay
+$SMTP_PORT = 587;                         // Brevo uses STARTTLS on 587
 
+// These two come from secrets.php (gitignored, server-only):
+//   $SMTP_USER = 'your-brevo-login@email';   (Brevo SMTP "Login")
+//   $SMTP_PASS = 'your-brevo-smtp-key';      (Brevo SMTP key)
+$SMTP_USER = '';
 $SMTP_PASS = '';
-@include __DIR__ . '/secrets.php';        // sets $SMTP_PASS (gitignored)
+@include __DIR__ . '/secrets.php';
 // ==================
 
 $wantsJson = isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false;
@@ -51,7 +55,7 @@ if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email
   respond(false, 'Please enter a valid email address.', $wantsJson);
 }
 
-if ($SMTP_PASS === '') {
+if ($SMTP_USER === '' || $SMTP_PASS === '') {
   respond(false, 'Email is not configured yet.', $wantsJson);
 }
 
@@ -99,7 +103,7 @@ HTML;
 
 $errW = '';
 $welcomeOk = smtp_send($SMTP_HOST, $SMTP_PORT, $SMTP_USER, $SMTP_PASS,
-  $SMTP_USER, $BRAND, $email, $SMTP_USER, $welcomeSubject, $welcomeHtml, $errW, true);
+  $FROM, $BRAND, $email, $FROM, $welcomeSubject, $welcomeHtml, $errW, true);
 
 // ---------- 2) Notification TO the shop inbox (plain text) ----------
 $notifySubject = 'New newsletter signup - ' . $BRAND;
@@ -110,7 +114,7 @@ $notifyBody .= "IP:    " . ($_SERVER['REMOTE_ADDR'] ?? 'n/a') . "\r\n";
 
 $errN = '';
 smtp_send($SMTP_HOST, $SMTP_PORT, $SMTP_USER, $SMTP_PASS,
-  $SMTP_USER, $BRAND, $TO, $email, $notifySubject, $notifyBody, $errN, false);
+  $FROM, $BRAND, $TO, $email, $notifySubject, $notifyBody, $errN, false);
 
 // Success is driven by the subscriber's welcome email (the one they expect)
 if ($welcomeOk) {
