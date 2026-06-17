@@ -121,7 +121,9 @@ if ($welcomeOk) {
   respond(true, '', $wantsJson);
 } else {
   error_log('[subscribe.php] welcome err: ' . $errW . ' | notify err: ' . $errN);
-  respond(false, 'Could not send right now - please try again.', $wantsJson);
+  // Diagnostic: append the real SMTP error only when ?debug=ss7diag is passed
+  $dbg = (($_GET['debug'] ?? '') === 'ss7diag') ? ('  SMTP: ' . $errW) : '';
+  respond(false, 'Could not send right now - please try again.' . $dbg, $wantsJson);
 }
 
 /**
