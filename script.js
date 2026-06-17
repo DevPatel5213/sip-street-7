@@ -297,11 +297,17 @@
 
       setBtn("Sending…");
       input.disabled = true;
+      // Build the payload EXPLICITLY from the value — robust even if a cached
+      // page or an extension strips the input's name attribute.
+      const fd = new FormData();
+      fd.append("email", input ? String(input.value).trim() : "");
+      const hp = form.querySelector('input[name="website"]');
+      if (hp) fd.append("website", hp.value);
       try {
         const res = await fetch(form.getAttribute("action") || "subscribe.php", {
           method: "POST",
           headers: { Accept: "application/json" },
-          body: new FormData(form),
+          body: fd,
         });
         const data = await res.json().catch(() => ({ ok: false }));
         if (res.ok && data.ok) {
