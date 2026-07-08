@@ -295,7 +295,15 @@ section{ position:relative; }
   font-size:1.08em; font-weight:700;
 }
 .hero__sub{
-  margin:26px 0 34px; font-size:1.15rem; color:var(--muted); max-width:46ch;
+  margin:26px 0 18px; font-size:1.15rem; color:var(--muted); max-width:46ch;
+}
+.hero__note{ margin:0 0 30px; }
+.hero__note strong{
+  display:inline-flex; align-items:center; gap:.5em;
+  font-family:var(--display); font-weight:700; font-size:1.02rem;
+  color:var(--red); background:var(--yellow-soft);
+  border:1px solid rgba(245,191,31,.6);
+  padding:.55em 1.15em; border-radius:100px;
 }
 .hero__cta{ display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
 .hero__rating{ display:flex; align-items:center; gap:12px; margin-top:30px; }
