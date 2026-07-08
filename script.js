@@ -16,7 +16,7 @@
      👉 Swap these three values for the client's real details.
      ========================================================= */
   const SS7 = {
-    orderUrl:     "https://www.ubereats.com/au",          // real online-ordering link goes here
+    orderUrl:     "mailto:hello@sipstreet7.com.au?subject=Event%20booking%20enquiry", // "Book for your event"
     phone:        "+61468346867",                          // dialled number (E.164 format)
     phoneDisplay: "+61 468 346 867",                       // shown on screen
     instagram:    "https://www.instagram.com/sipstreet.7/",// Instagram profile
@@ -224,9 +224,7 @@
     const openModal = (item) => {
       lastFocus = document.activeElement;
       if (sub) {
-        sub.textContent = item
-          ? `Grab a ${item} — pick the easiest way below.`
-          : "Pick the easiest way to get your Sip Street 7 fix.";
+        sub.textContent = "Have Sip Street 7 at your event, or catch us at the markets.";
       }
       modal.classList.add("open");
       modal.setAttribute("aria-hidden", "false");
